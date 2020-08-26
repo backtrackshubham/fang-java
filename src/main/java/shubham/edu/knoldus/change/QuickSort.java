@@ -1,4 +1,4 @@
-package edu.knoldus.change;
+package shubham.edu.knoldus.change;
 
 import java.util.Arrays;
 import java.util.Random;

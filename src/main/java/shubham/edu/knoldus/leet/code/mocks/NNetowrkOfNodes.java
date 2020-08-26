@@ -1,4 +1,4 @@
-package edu.knoldus.leet.code.mocks;
+package shubham.edu.knoldus.leet.code.mocks;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package edu.knoldus.leet.code.practice;
+package shubham.edu.knoldus.leet.code.practice;
 
 /**
  * On an alphabet board, we start at position (0, 0), corresponding to character board[0][0].

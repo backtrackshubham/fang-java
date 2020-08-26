@@ -1,8 +1,7 @@
-package edu.knoldus.leet.code.practice;
+package shubham.edu.knoldus.leet.code.practice;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class    Traversals {
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
-package edu.knoldus;
+package shubham.edu.knoldus;
 
-import edu.knoldus.model.Demo;
-import edu.knoldus.model.HigherOrderFunctions;
+import shubham.edu.knoldus.model.Demo;
+import shubham.edu.knoldus.model.HigherOrderFunctions;
 
 import java.util.function.Predicate;
 

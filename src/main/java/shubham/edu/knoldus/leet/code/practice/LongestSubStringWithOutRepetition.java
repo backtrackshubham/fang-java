@@ -1,4 +1,4 @@
-package edu.knoldus.leet.code.practice;
+package shubham.edu.knoldus.leet.code.practice;
 
 import java.util.HashMap;
 import java.util.Map;

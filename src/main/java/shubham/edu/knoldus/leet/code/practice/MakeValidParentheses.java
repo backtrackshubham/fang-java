@@ -1,6 +1,4 @@
-package edu.knoldus.leet.code.practice;
-
-import java.util.Arrays;
+package shubham.edu.knoldus.leet.code.practice;
 
 public class MakeValidParentheses {
     public static void main(String[] args) {

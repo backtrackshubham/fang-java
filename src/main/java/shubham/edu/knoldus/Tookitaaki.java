@@ -1,4 +1,4 @@
-package edu.knoldus;
+package shubham.edu.knoldus;
 
 import java.util.HashSet;
 import java.util.Set;

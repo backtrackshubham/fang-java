@@ -1,8 +1,6 @@
-package edu.knoldus.leet.code.thirtydays.May;
+package shubham.edu.knoldus.leet.code.thirtydays.May;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import edu.knoldus.google.foobar.Questions;
+import shubham.edu.knoldus.google.foobar.Questions;
 
 
 public class ThirtyDays {

@@ -1,4 +1,4 @@
-package edu.knoldus.google;
+package shubham.edu.knoldus.google;
 
 import java.util.Random;
 import java.util.stream.IntStream;

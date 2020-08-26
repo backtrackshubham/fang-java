@@ -1,4 +1,4 @@
-package edu.knoldus.model;
+package shubham.edu.knoldus.model;
 
 import java.util.Optional;
 

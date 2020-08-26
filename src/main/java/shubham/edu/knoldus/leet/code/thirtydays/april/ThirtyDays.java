@@ -1,4 +1,4 @@
-package edu.knoldus.leet.code.thirtydays.april;
+package shubham.edu.knoldus.leet.code.thirtydays.april;
 
 import java.util.*;
 import java.util.stream.Collectors;

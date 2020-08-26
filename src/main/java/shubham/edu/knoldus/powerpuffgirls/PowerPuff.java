@@ -1,4 +1,4 @@
-package edu.knoldus.powerpuffgirls;
+package shubham.edu.knoldus.powerpuffgirls;
 
 import java.util.Scanner;
 /**
