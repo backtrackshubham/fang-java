@@ -1,4 +1,4 @@
-package edu.knoldus.leet.code.practice;
+package shubham.edu.knoldus.leet.code.practice;
 
 public class Tester {
     public static void main(String[] args) {

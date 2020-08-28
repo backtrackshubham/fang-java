@@ -1,4 +1,4 @@
-package edu.knoldus.coursesera.weeks.one;
+package shubham.edu.knoldus.coursesera.weeks.one;
 
 import java.util.Arrays;
 import java.util.HashSet;

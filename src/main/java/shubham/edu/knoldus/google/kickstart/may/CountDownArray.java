@@ -1,4 +1,4 @@
-package edu.knoldus.google.kickstart.may;
+package shubham.edu.knoldus.google.kickstart.may;
 
 import java.util.Arrays;
 import java.util.Scanner;

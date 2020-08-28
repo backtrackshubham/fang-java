@@ -1,4 +1,4 @@
-package edu.knoldus.leet.code.pramp;
+package shubham.edu.knoldus.leet.code.pramp;
 
 
 import java.util.*;
