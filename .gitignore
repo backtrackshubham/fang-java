@@ -34,3 +34,5 @@ akka-seeding/
 deploy/manifests
 .classpath
 .settings
+.project
+.vscode

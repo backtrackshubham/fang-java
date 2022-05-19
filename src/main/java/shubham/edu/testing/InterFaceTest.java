@@ -79,7 +79,7 @@ public class InterFaceTest {
             }
         };
 
-        List<CompletableFuture<String>> collect = Stream.iterate(1, i -> i + 1).limit(10).map(value -> {
+List<CompletableFuture<String>> collect = Stream.iterate(1, i -> i + 1).limit(10).map(value -> {
             if (value % 2 == 0) {
                 return getF();
             } else return getF(" " + integer.getAsInt());
