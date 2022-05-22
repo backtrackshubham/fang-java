@@ -10,11 +10,11 @@ class Main{
     }
 }
 
-class TreeNode {
-      int val;
+class TreeNode<T> {
+      T val;
       TreeNode left;
       TreeNode right;
-      TreeNode(int x) { val = x; }
+      TreeNode(T x) { val = x; }
 
     @Override
     public String toString() {

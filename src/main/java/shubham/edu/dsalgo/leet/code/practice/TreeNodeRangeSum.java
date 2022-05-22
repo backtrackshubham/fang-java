@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 class TreeNodeRangeSum {
-    public int rangeSumBST(TreeNode root, int L, int R) {
+    public int rangeSumBST(TreeNode<Integer> root, int L, int R) {
         if(root == null){
             return 0;
         }
@@ -19,7 +19,7 @@ class TreeNodeRangeSum {
         return sum;
     }
 
-    public void traverse(TreeNode root, int L, int R, ArrayList<Integer> ar) {
+    public void traverse(TreeNode<Integer> root, int L, int R, ArrayList<Integer> ar) {
         if(root == null){
             return ;
         } else{
@@ -35,7 +35,7 @@ class TreeNodeRangeSum {
         }
     }
 
-    public int traverse2(TreeNode root, int L, int R, int sum) {
+    public int traverse2(TreeNode<Integer> root, int L, int R, int sum) {
         if(root == null){
             return sum;
         } else{

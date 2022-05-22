@@ -6,7 +6,7 @@ import java.util.function.Function;
 public class  Traversals {
     public static void main(String[] args) {
 
-        TreeNode t = TraversalHelper.parseAndBuildNode("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
+        TreeNode<Integer> t = TraversalHelper.parseAndBuildNode("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
 ////        System.out.println("Preorder " + TraversalHelper.preorderTraversalIterative(t));
 //        System.out.println("Preorder " + TraversalHelper.preorderTraversalRecursive(t, new ArrayList<>()));
 //        System.out.println("Inorder " + TraversalHelper.inorderTraversalIterative(t));
@@ -39,7 +39,7 @@ class TraversalHelper {
      */
 
 
-    static TreeNode parseAndBuildNode(String inputString) {
+    static TreeNode<Integer> parseAndBuildNode(String inputString) {
         int length = inputString.split(",").length;
         int levels = 0;
         if ((length + 1) % 2 != 0) {
@@ -55,7 +55,7 @@ class TraversalHelper {
 
     private static Function<Integer, TreeNode> getNodeInt = TreeNode::new;
 
-    private static Function<String, TreeNode> getNode = (value) -> {
+    private static Function<String, TreeNode<Integer>> getNode = (value) -> {
         if (value.equals("null")) return null;
         return new TreeNode(Integer.parseInt(value));
     };
@@ -68,8 +68,8 @@ class TraversalHelper {
         return totalNodes;
     }
 
-    static TreeNode buildNode(String string, int levels) {
-        TreeNode toRet = null;
+    static TreeNode<Integer> buildNode(String string, int levels) {
+        TreeNode<Integer> toRet = null;
         String[] nodes = string.split(",");
 //        if(levels == 1) {
 //            toRet = getNode.apply(nodes[0]);
@@ -87,13 +87,13 @@ class TraversalHelper {
         return toRet;
     }
 
-    static void insertAtFirstNull(TreeNode root, TreeNode toInsert) {
-        Queue<TreeNode> tn = new LinkedList<>();
+    static void insertAtFirstNull(TreeNode<Integer> root, TreeNode<Integer> toInsert) {
+        Queue<TreeNode<Integer>> tn = new LinkedList<>();
         tn.add(root);
 
         do {
-            Queue<TreeNode> tnew = new LinkedList<>();
-            for (TreeNode node : tn) {
+            Queue<TreeNode<Integer>> tnew = new LinkedList<>();
+            for (TreeNode<Integer> node : tn) {
                 if (node.left == null) {
                     node.left = toInsert;
                     return;
@@ -110,11 +110,11 @@ class TraversalHelper {
     }
 
 
-    static List<Integer> preorderTraversalIterative(TreeNode root) {
-        Stack<TreeNode> s = new Stack<>();
+    static List<Integer> preorderTraversalIterative(TreeNode<Integer> root) {
+        Stack<TreeNode<Integer>> s = new Stack<>();
         ArrayList<Integer> al = new ArrayList<>();
         if (root == null) return al;
-        TreeNode elmUndProcess = root;
+        TreeNode<Integer> elmUndProcess = root;
         while (elmUndProcess != null || !s.empty()) {
             while (elmUndProcess != null) {
                 al.add(elmUndProcess.val);
@@ -128,7 +128,7 @@ class TraversalHelper {
         return al;
     }
 
-    static List<Integer> preorderTraversalRecursive(TreeNode root, List<Integer> list) {
+    static List<Integer> preorderTraversalRecursive(TreeNode<Integer> root, List<Integer> list) {
         if (root == null) {
             return list;
         } else {
@@ -137,11 +137,11 @@ class TraversalHelper {
         }
     }
 
-    static List<Integer> inorderTraversalIterative(TreeNode root) {
-        Stack<TreeNode> s = new Stack<>();
+    static List<Integer> inorderTraversalIterative(TreeNode<Integer> root) {
+        Stack<TreeNode<Integer>> s = new Stack<>();
         ArrayList<Integer> al = new ArrayList<>();
         if(root == null) return al;
-        TreeNode elmUndProcess = root;
+        TreeNode<Integer> elmUndProcess = root;
         while ( elmUndProcess != null || !s.empty()){
             while (elmUndProcess != null){
                 s.push(elmUndProcess);
@@ -154,11 +154,11 @@ class TraversalHelper {
         return al;
     }
 
-    static List<Integer> inorderTraversalIterativeSmart(TreeNode root) {
-        Stack<TreeNode> s = new Stack<>();
+    static List<Integer> inorderTraversalIterativeSmart(TreeNode<Integer> root) {
+        Stack<TreeNode<Integer>> s = new Stack<>();
         ArrayList<Integer> al = new ArrayList<>();
         if (root == null) return al;
-        TreeNode elmUndProcess = root;
+        TreeNode<Integer> elmUndProcess = root;
         s.push(elmUndProcess);
         while (!s.empty() || elmUndProcess != null) {
 
@@ -175,7 +175,7 @@ class TraversalHelper {
         return al;
     }
 
-    static List<Integer> inorderTraversalRecursive(TreeNode root, List<Integer> list) {
+    static List<Integer> inorderTraversalRecursive(TreeNode<Integer> root, List<Integer> list) {
 
         if (root == null) {
             return list;
@@ -189,11 +189,11 @@ class TraversalHelper {
         }
     }
 
-    static List<Integer> postorderTraversal(TreeNode root) {
+    static List<Integer> postorderTraversal(TreeNode<Integer> root) {
         ArrayList<Integer> al = new ArrayList<>();
-        TreeNode elmUndProcess = root;
+        TreeNode<Integer> elmUndProcess = root;
         if (root == null) return al;
-        Stack<TreeNode> t = new Stack<>();
+        Stack<TreeNode<Integer>> t = new Stack<>();
 
         do {
             while (elmUndProcess != null) {
@@ -215,16 +215,16 @@ class TraversalHelper {
         return al;
     }
 
-    static List<List<Integer>> levelOrder(TreeNode root) {
+    static List<List<Integer>> levelOrder(TreeNode<Integer> root) {
         List<List<Integer>> finalList = new ArrayList<>();
-        Queue<TreeNode> tn = new LinkedList<>();
+        Queue<TreeNode<Integer>> tn = new LinkedList<>();
         List<Integer> finalListToAdd = new ArrayList<>();
         tn.add(root);
         if (root == null) return finalList;
 
         do {
-            Queue<TreeNode> tnew = new LinkedList<>();
-            for (TreeNode node : tn) {
+            Queue<TreeNode<Integer>> tnew = new LinkedList<>();
+            for (TreeNode<Integer> node : tn) {
                 finalListToAdd.add(node.val);
                 if (node.left != null && node.right != null) {
                     tnew.add(node.left);
@@ -240,11 +240,11 @@ class TraversalHelper {
         return finalList;
     }
 
-    static int maxDepth(TreeNode root) {
+    static int maxDepth(TreeNode<Integer> root) {
         return root == null ? 0 : Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 
-    static boolean isSymmetric(TreeNode root) {
+    static boolean isSymmetric(TreeNode<Integer> root) {
         if (root == null) {
             return true;
         } else {
@@ -252,7 +252,7 @@ class TraversalHelper {
         }
     }
 
-    static boolean compareNodes(TreeNode left, TreeNode right) {
+    static boolean compareNodes(TreeNode<Integer> left, TreeNode<Integer> right) {
         if (left == null && right == null) {
             return true;
         } else if (left == null || right == null) {
@@ -262,7 +262,7 @@ class TraversalHelper {
         } else return false;
     }
 
-    static boolean hasPathSum(TreeNode root, int sum) {
+    static boolean hasPathSum(TreeNode<Integer> root, int sum) {
         if (root == null && --sum == 0) {
             return true;
         } else if (root == null) {
@@ -272,7 +272,7 @@ class TraversalHelper {
         }
     }
 
-    static TreeNode buildTree(int[] inorder, int[] postorder) {
+    static TreeNode<Integer> buildTree(int[] inorder, int[] postorder) {
         if(inorder.length == 0 || postorder.length == 0){
             return null;
         } else if(inorder.length == 1 || postorder.length == 1){
@@ -282,11 +282,11 @@ class TraversalHelper {
         }
     }
 
-    static TreeNode treeBuilderHelperRecursive(TreeNode tree, int[] inorder, int[] postorder){
+    static TreeNode<Integer> treeBuilderHelperRecursive(TreeNode<Integer> tree, int[] inorder, int[] postorder){
         if(inorder.length == 0 || postorder.length == 0){
             return tree;
         }
-        TreeNode root = getNodeInt.apply(postorder[postorder.length - 1]);
+        TreeNode<Integer> root = getNodeInt.apply(postorder[postorder.length - 1]);
         int rootPosition = postorder.length - 1;
         int rootPositionInOrder = postorder.length - 1;
         int currentNodeLeft = Integer.MIN_VALUE;

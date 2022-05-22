@@ -1,5 +1,6 @@
 package shubham.edu.dsalgo.leet.code.practice;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -12,7 +13,7 @@ class MainSum {
 
 public class DeepestLeafSum {
 
-    public int deepestLeavesSum(TreeNode root) {
+    public int deepestLeavesSum(TreeNode<Integer> root) {
         int sum = 0;
         if (root == null) {
             return sum;
@@ -21,7 +22,7 @@ public class DeepestLeafSum {
         }
     }
 
-    private int findHeight(TreeNode treeNode, int height) {
+    private int findHeight(TreeNode<Integer> treeNode, int height) {
         if (treeNode.left != null && treeNode.right != null) {
             int lh = findHeight(treeNode.left, height + 1);
             int lr = findHeight(treeNode.right, height + 1);
@@ -36,8 +37,8 @@ public class DeepestLeafSum {
         }
     }
 
-    private int traverseTree(TreeNode node, int height, int aggSum) {
-        Iterator<TreeNode> iterator = Collections.emptyIterator();
+    private int traverseTree(TreeNode<Integer> node, int height, int aggSum) {
+        Iterator<TreeNode<Integer>> iterator = Collections.emptyIterator();
         while (iterator.hasNext()) {
             aggSum += iterator.next().val;
         }
@@ -45,7 +46,7 @@ public class DeepestLeafSum {
         return aggSum;
     }
 
-    private ArrayList<TreeNode> getNodesWithHeight(TreeNode treeNode, int currentHeight, int height, ArrayList<TreeNode> nodes) {
+    private ArrayList<TreeNode<Integer>> getNodesWithHeight(TreeNode<Integer> treeNode, int currentHeight, int height, ArrayList<TreeNode<Integer>> nodes) {
         if (currentHeight == height) {
             nodes.add(treeNode);
             return nodes;
@@ -67,7 +68,7 @@ public class DeepestLeafSum {
     }
 
     // path sum
-    static public boolean hasPathSum(TreeNode root, int sum) {
+    static public boolean hasPathSum(TreeNode<Integer> root, int sum) {
         if(root == null) return false;
         if(root.left == null && root.right == null){
             return sum - root.val == 0;
