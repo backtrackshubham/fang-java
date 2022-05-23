@@ -22,20 +22,7 @@ public class DeepestLeafSum {
         }
     }
 
-    private int findHeight(TreeNode<Integer> treeNode, int height) {
-        if (treeNode.left != null && treeNode.right != null) {
-            int lh = findHeight(treeNode.left, height + 1);
-            int lr = findHeight(treeNode.right, height + 1);
-            System.out.println("Left Height " + lh + " Right Height " + lr);
-            return height + Math.max(lh, lr);
-        } else if (treeNode.left == null && treeNode.right == null) {
-            return height;
-        } else if (treeNode.right == null) {
-            return findHeight(treeNode.left, height + 1);
-        } else {
-            return findHeight(treeNode.right, height + 1);
-        }
-    }
+
 
     private int traverseTree(TreeNode<Integer> node, int height, int aggSum) {
         Iterator<TreeNode<Integer>> iterator = Collections.emptyIterator();

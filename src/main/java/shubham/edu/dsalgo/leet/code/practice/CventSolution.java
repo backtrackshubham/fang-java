@@ -6,7 +6,7 @@ public class CventSolution {
         int sumIremember = 0;
 
         for (int i = 0; i < A.length; i++) {
-            sumIremember+=A[i];
+            sumIremember += A[i];
         }
 
         int sumIDontRemember = (M * (A.length + F)) - sumIremember;
@@ -15,16 +15,16 @@ public class CventSolution {
 
         int resultToTake = 6;
         int i = 0;
-        while (sumIDontRemember > 0 ){
-            if(resultToTake >= sumIDontRemember){
-                sumIDontRemember-=resultToTake;
+        while (sumIDontRemember > 0) {
+            if (resultToTake >= sumIDontRemember) {
+                sumIDontRemember -= resultToTake;
             }
             forg[i++] = resultToTake;
-            if(i == forg.length && sumIDontRemember != 0){
-                
+            if (i == forg.length && sumIDontRemember != 0) {
+
             }
         }
-return A;
+        return A;
     }
 }
 

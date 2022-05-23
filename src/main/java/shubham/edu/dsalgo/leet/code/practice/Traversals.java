@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 public class  Traversals {
     public static void main(String[] args) {
+        TreeViews treeViews = new TreeViews<Integer>();
 
         TreeNode<Integer> t = TraversalHelper.parseAndBuildNode("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
 ////        System.out.println("Preorder " + TraversalHelper.preorderTraversalIterative(t));
@@ -17,7 +18,7 @@ public class  Traversals {
 //
 //        TraversalHelper.buildTree(inorder, postOrder);
 
-        TreeNode test = TreeNode.buildTree(3);
+        TreeNode test = TreeNode.buildTree(31);
         System.out.println(test);
         System.out.println("---------------------------");
 //        System.out.println(t);
@@ -25,8 +26,24 @@ public class  Traversals {
         System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(test));
         System.out.println("Postorder " + TraversalHelper.postorderTraversal(test));
 
+        System.out.println("---------------------------");
+//        System.out.println(t);
+        System.out.println("Preorder  " + TraversalHelper.preorderTraversalRecursive(t, new ArrayList<>()));;
+        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(t));
+        System.out.println("Postorder " + TraversalHelper.postorderTraversal(t));
+
+        System.out.println("Tree left view "+treeViews.printView(t, true));
+        System.out.println("Tree right view "+treeViews.printView(t, false));
+
+        System.out.println("Tree left view "+treeViews.printView(test, true));
+        System.out.println("Tree right view "+treeViews.printView(test, false));
 
 
+        System.out.println("Tree height view "+ t.getHeight());
+        System.out.println("Tree height view "+t.getHeight());
+
+        System.out.println("Tree height view "+ test.getHeight());
+        System.out.println("Tree height view "+test.getHeight());
     }
 }
 
@@ -53,11 +70,11 @@ class TraversalHelper {
         return buildNode(inputString, levels);
     }
 
-    private static Function<Integer, TreeNode> getNodeInt = TreeNode::new;
+    private static Function<Integer, TreeNode<Integer>> getNodeInt = TreeNode::new;
 
     private static Function<String, TreeNode<Integer>> getNode = (value) -> {
         if (value.equals("null")) return null;
-        return new TreeNode(Integer.parseInt(value));
+        return new TreeNode<Integer>(Integer.parseInt(value));
     };
 
     static int totalNodesInLevel(int level) {

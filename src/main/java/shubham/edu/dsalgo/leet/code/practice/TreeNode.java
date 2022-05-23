@@ -12,9 +12,27 @@ class Main{
 
 class TreeNode<T> {
       T val;
-      TreeNode left;
-      TreeNode right;
+      TreeNode<T> left;
+      TreeNode<T> right;
       TreeNode(T x) { val = x; }
+
+    public int getHeight() {
+          return findHeight(this, 0);
+    }
+    private int findHeight(TreeNode<T> treeNode, int height) {
+        if (treeNode.left != null && treeNode.right != null) {
+            int lh = findHeight(treeNode.left, height + 1);
+            int lr = findHeight(treeNode.right, height + 1);
+            System.out.println("Left Height " + lh + " Right Height " + lr);
+            return height + Math.max(lh, lr);
+        } else if (treeNode.left == null && treeNode.right == null) {
+            return height;
+        } else if (treeNode.right == null) {
+            return findHeight(treeNode.left, height + 1);
+        } else {
+            return findHeight(treeNode.right, height + 1);
+        }
+    }
 
     @Override
     public String toString() {
