@@ -1,8 +1,7 @@
 package shubham.edu.dsalgo.leet.code.practice;
 
-import java.util.ArrayList;
-import java.util.ListIterator;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class Main{
     public static void main(String[] args) {
@@ -23,8 +22,7 @@ class TreeNode<T> {
         if (treeNode.left != null && treeNode.right != null) {
             int lh = findHeight(treeNode.left, height + 1);
             int lr = findHeight(treeNode.right, height + 1);
-            System.out.println("Left Height " + lh + " Right Height " + lr);
-            return height + Math.max(lh, lr);
+            return Math.max(lh, lr);
         } else if (treeNode.left == null && treeNode.right == null) {
             return height;
         } else if (treeNode.right == null) {
@@ -47,6 +45,50 @@ class TreeNode<T> {
         } else {
             return str.append(this.val).toString();
         }
+    }
+
+    public void printElementList(List<T> elements, int firstColumn, int middleColumn){
+          StringBuffer sb = new StringBuffer("");
+          while (firstColumn > 0){
+              sb.append("\t");
+              firstColumn--;
+          }
+          StringBuffer mid = new StringBuffer("");
+          while (middleColumn > 0){
+              mid.append("\t");
+              middleColumn--;
+          }
+          elements.forEach(el -> {
+              if(el == null){
+                  sb.append(" \t");
+              } else {
+                  sb.append(el+""+mid);
+              }
+          });
+          sb.append("\n");
+        System.out.println(sb);
+    }
+
+    public void printTree(TreeNode<T> tree){
+          int height = tree.getHeight();
+          List<TreeNode<T>> li = new ArrayList<>();
+          li.add(tree);
+          while(height > 0){
+              printElementList(li.stream().map(x -> x.val).collect(Collectors.toList()), (int)Math.pow(2, height) - 1, (int)Math.pow(2, height + 1));
+              List<TreeNode<T>> temp = new ArrayList<>();
+              Iterator<TreeNode<T>> it = li.listIterator();
+              while (it.hasNext()){
+                  TreeNode<T> next = it.next();
+                  if(next.left == null || next.right == null){
+                      System.out.println("Adding a null element");
+                      System.out.println(next.val);
+                  }
+                  temp.add(next.left);
+                  temp.add(next.right);
+              }
+              height--;
+              li = temp;
+          }
     }
 
     static java.util.Random r = new Random();

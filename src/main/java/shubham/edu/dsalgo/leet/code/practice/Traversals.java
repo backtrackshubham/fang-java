@@ -19,31 +19,33 @@ public class  Traversals {
 //        TraversalHelper.buildTree(inorder, postOrder);
 
         TreeNode test = TreeNode.buildTree(31);
-        System.out.println(test);
-        System.out.println("---------------------------");
+//        System.out.println(test);
+//        System.out.println("---------------------------");
 //        System.out.println(t);
-        System.out.println("Preorder  " + TraversalHelper.preorderTraversalRecursive(test, new ArrayList<>()));;
-        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(test));
-        System.out.println("Postorder " + TraversalHelper.postorderTraversal(test));
+//        System.out.println("Preorder  " + TraversalHelper.preorderTraversalRecursive(test, new ArrayList<>()));;
+//        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(test));
+//        System.out.println("Postorder " + TraversalHelper.postorderTraversal(test));
 
-        System.out.println("---------------------------");
+//        System.out.println("---------------------------");
 //        System.out.println(t);
-        System.out.println("Preorder  " + TraversalHelper.preorderTraversalRecursive(t, new ArrayList<>()));;
-        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(t));
-        System.out.println("Postorder " + TraversalHelper.postorderTraversal(t));
+//        System.out.println("Preorder  " + TraversalHelper.preorderTraversalRecursive(t, new ArrayList<>()));;
+//        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(t));
+//        System.out.println("Postorder " + TraversalHelper.postorderTraversal(t));
 
         System.out.println("Tree left view "+treeViews.printView(t, true));
         System.out.println("Tree right view "+treeViews.printView(t, false));
 
-        System.out.println("Tree left view "+treeViews.printView(test, true));
-        System.out.println("Tree right view "+treeViews.printView(test, false));
+//        System.out.println("Tree left view "+treeViews.printView(test, true));
+//        System.out.println("Tree right view "+treeViews.printView(test, false));
 
 
         System.out.println("Tree height view "+ t.getHeight());
         System.out.println("Tree height view "+t.getHeight());
+        t.printTree(t);
+//        t.printTree(test);
 
-        System.out.println("Tree height view "+ test.getHeight());
-        System.out.println("Tree height view "+test.getHeight());
+//        System.out.println("Tree height view "+ test.getHeight());
+//        System.out.println("Tree height view "+test.getHeight());
     }
 }
 
@@ -97,7 +99,7 @@ class TraversalHelper {
             int numberOfNodesForThisLevel = (int) Math.pow(2, i); //4
             int indexToPickFrom = totalNodesInLevel(i); //3
             for (int x = indexToPickFrom; x < indexToPickFrom + numberOfNodesForThisLevel; x++) {
-                System.out.println("Going to insert " + nodes[x]);
+//                System.out.println("Going to insert " + nodes[x]);
                 insertAtFirstNull(toRet, getNode.apply(nodes[x]));
             }
         }

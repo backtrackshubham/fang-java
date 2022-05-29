@@ -1,6 +1,6 @@
 package shubham.edu.dsalgo.leet.code.thirtydays.May;
 
-import shubham.edu.dsalgo.google.foobar.Questions;
+import shubham.edu.dsalgo.companies.google.foobar.Questions;
 
 
 public class ThirtyDays {

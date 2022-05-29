@@ -1,4 +1,4 @@
-package shubham.edu.dsalgo.google.foobar;
+package shubham.edu.dsalgo.companies.google.foobar;
 
 import java.time.Instant;
 import java.util.*;

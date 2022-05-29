@@ -1,4 +1,4 @@
-package shubham.edu.dsalgo.google;
+package shubham.edu.dsalgo.companies.google;
 
 import java.util.Random;
 import java.util.stream.IntStream;

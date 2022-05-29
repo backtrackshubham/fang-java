@@ -1,4 +1,4 @@
-package shubham.edu.dsalgo.google.kickstart.may;
+package shubham.edu.dsalgo.companies.google.kickstart.may;
 
 import java.util.Arrays;
 import java.util.Scanner;
