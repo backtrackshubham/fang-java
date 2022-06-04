@@ -3,21 +3,22 @@ package shubham.edu.dsalgo.leet.code.practice;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
-public class ListNode {
-    public Integer val;
-    public ListNode next;
+public class ListNode<T> {
+    public T val;
+    public ListNode<T> next;
 
-    public ListNode(int x) {
+    public ListNode(T x) {
         val = x;
     }
 
-    public static ListNode apply(int value){
-        return new ListNode(value);
-    }
+//    public static ListNode apply(int value, Supplier<T> supplier){
+//        return new ListNode(value);
+//    }
 
-    public ListNode addElementEnd(ListNode node){
-        ListNode t = this;
+    public ListNode<T> addElementEnd(ListNode<T> node){
+        ListNode<T> t = this;
         while (t.next !=  null) {
             t = t.next;
         }
@@ -25,12 +26,12 @@ public class ListNode {
         return this;
     }
 
-    public static ListNode buildRandomList(int numElements){
+    public static ListNode<Integer> buildRandomList(int numElements){
         if(numElements > 0){
             Random rand = new java.util.Random();
-            ListNode node = new ListNode(rand.nextInt(1000));
+            ListNode<Integer> node = new ListNode<Integer>(rand.nextInt(1000));
             while (--numElements > 0){
-                node.addElementEnd(new ListNode(rand.nextInt(1000)));
+                node.addElementEnd(new ListNode<Integer>(rand.nextInt(1000)));
             }
             return node;
         } else return null;
@@ -39,7 +40,7 @@ public class ListNode {
     @Override
     public String toString() {
         StringBuilder strRep = new StringBuilder();
-        ListNode t = this;
+        ListNode<T> t = this;
         while (t != null) {
             strRep.append(t.val).append("-->");
             t = t.next;

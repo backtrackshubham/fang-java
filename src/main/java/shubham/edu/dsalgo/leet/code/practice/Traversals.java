@@ -3,16 +3,29 @@ package shubham.edu.dsalgo.leet.code.practice;
 import java.util.*;
 import java.util.function.Function;
 
-public class  Traversals {
+public class Traversals {
     public static void main(String[] args) {
         TreeViews treeViews = new TreeViews<Integer>();
 
         TreeNode<Integer> t = TraversalHelper.parseAndBuildNodeBetter("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
         TreeNode<Integer> t2 = TraversalHelper.parseAndBuildNodeBetter("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
         TreeNode<Integer> t3 = TraversalHelper.parseAndBuildNodeBetter("3,5,7,4,null,null,9");
+        TreeNode<Integer> t4 = TraversalHelper.parseAndBuildNodeBetter("3,5,7,4");
         t.printTree();
-        t2.printTree();
-        t3.printTree();
+//        t2.printTree();
+//        t3.printTree();
+//        t4.printTree();
+
+        t.toHeap((o1, o2) -> {
+            if (o1.intValue() == o2.intValue()) {
+                return 0;
+            } else if (o1 > o2) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
+        t.printTree();
 //        System.out.println("Preorder  " + TraversalHelper.preorderTraversalIterative(t));
 //        System.out.println("Preorder  " + TraversalHelper.preorderTraversalRecursive(t, new ArrayList<>()));
 //        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(t));
@@ -70,6 +83,12 @@ public class  Traversals {
 }
 
 class TraversalHelper {
+    private static final Function<Integer, TreeNode<Integer>> getNodeInt = TreeNode::new;
+    private static final Function<String, TreeNode<Integer>> getNode = (value) -> {
+        if (value.equals("null")) return null;
+        return new TreeNode<Integer>(Integer.parseInt(value));
+    };
+
     /**
      * A string should be separated by , in BFS format including nulls
      *
@@ -95,19 +114,19 @@ class TraversalHelper {
         String[] split = inputString.split(",");
         int length = split.length;
         int i = 0;
-        if(split[i].contains( "null")) {
+        if (split[i].contains("null")) {
             return null;
         }
         TreeNode<Integer>[] treeArray = new TreeNode[length];
 
         TreeNode<Integer> toRet = new TreeNode<>(Integer.parseInt(split[i]));
         treeArray[i] = toRet;
-        while (i < length){
-            if(!split[i].contains("null")){
+        while (i < length) {
+            if (!split[i].contains("null")) {
                 int leftIndex = 2 * i + 1;
                 int rightIndex = 2 * i + 2;
-                if(leftIndex < length){
-                    if(!split[leftIndex].contains("null")) {
+                if (leftIndex < length) {
+                    if (!split[leftIndex].contains("null")) {
 
                         TreeNode<Integer> integerTreeNodeLeft = new TreeNode<>(Integer.parseInt(split[leftIndex]));
                         treeArray[i].left = integerTreeNodeLeft;
@@ -116,7 +135,7 @@ class TraversalHelper {
                         treeArray[leftIndex] = null;
                     }
                 }
-                if(rightIndex < length) {
+                if (rightIndex < length) {
                     if (!split[rightIndex].contains("null")) {
                         TreeNode<Integer> integerTreeNodeRight = new TreeNode<>(Integer.parseInt(split[rightIndex]));
                         treeArray[i].right = integerTreeNodeRight;
@@ -149,17 +168,15 @@ class TraversalHelper {
         return toRet;
     }
 
-
-
-    static TreeNode<Integer> buildSkewed(int num, boolean isLeft){
+    static TreeNode<Integer> buildSkewed(int num, boolean isLeft) {
         TreeNode<Integer> tree = null;
 
-        while (num > 0){
-            if(tree == null){
+        while (num > 0) {
+            if (tree == null) {
                 tree = new TreeNode<>(num--);
             } else {
                 TreeNode tmp = new TreeNode<>(num--);
-                if(isLeft){
+                if (isLeft) {
                     tmp.left = tree;
                 } else {
                     tmp.right = tree;
@@ -170,13 +187,6 @@ class TraversalHelper {
         return tree;
 
     }
-
-    private static Function<Integer, TreeNode<Integer>> getNodeInt = TreeNode::new;
-
-    private static Function<String, TreeNode<Integer>> getNode = (value) -> {
-        if (value.equals("null")) return null;
-        return new TreeNode<Integer>(Integer.parseInt(value));
-    };
 
     static int totalNodesInLevel(int level) {
         int totalNodes = 0;
@@ -259,10 +269,10 @@ class TraversalHelper {
     static List<Integer> inorderTraversalIterative(TreeNode<Integer> root) {
         Stack<TreeNode<Integer>> s = new Stack<>();
         ArrayList<Integer> al = new ArrayList<>();
-        if(root == null) return al;
+        if (root == null) return al;
         TreeNode<Integer> elmUndProcess = root;
-        while ( elmUndProcess != null || !s.empty()){
-            while (elmUndProcess != null){
+        while (elmUndProcess != null || !s.empty()) {
+            while (elmUndProcess != null) {
                 s.push(elmUndProcess);
                 elmUndProcess = elmUndProcess.left;
             }
@@ -351,7 +361,7 @@ class TraversalHelper {
                 } else if (node.left != null) tnew.add(node.left);
                 else if (node.right != null) tnew.add(node.right);
             }
-            finalList.addAll(Collections.singleton(finalListToAdd));
+            finalList.add(finalListToAdd);
             finalListToAdd = new ArrayList<>();
             tn = tnew;
         } while (!tn.isEmpty());
@@ -392,17 +402,17 @@ class TraversalHelper {
     }
 
     static TreeNode<Integer> buildTree(int[] inorder, int[] postorder) {
-        if(inorder.length == 0 || postorder.length == 0){
+        if (inorder.length == 0 || postorder.length == 0) {
             return null;
-        } else if(inorder.length == 1 || postorder.length == 1){
+        } else if (inorder.length == 1 || postorder.length == 1) {
             return getNodeInt.apply(inorder[0]);
-        } else{
+        } else {
             return treeBuilderHelperRecursive(null, inorder, postorder);
         }
     }
 
-    static TreeNode<Integer> treeBuilderHelperRecursive(TreeNode<Integer> tree, int[] inorder, int[] postorder){
-        if(inorder.length == 0 || postorder.length == 0){
+    static TreeNode<Integer> treeBuilderHelperRecursive(TreeNode<Integer> tree, int[] inorder, int[] postorder) {
+        if (inorder.length == 0 || postorder.length == 0) {
             return tree;
         }
         TreeNode<Integer> root = getNodeInt.apply(postorder[postorder.length - 1]);
@@ -416,10 +426,9 @@ class TraversalHelper {
         ArrayList<Integer> rightSubtreePostOrder = new ArrayList<>();
 
 
-
         //find root in inorder
         for (int i = 0; i < inorder.length; i++) {
-            if(root.val == inorder[i]){
+            if (root.val == inorder[i]) {
                 rootPositionInOrder = i;
                 break;
             }
@@ -432,31 +441,31 @@ class TraversalHelper {
             rightSubTreeInOrder.add(inorder[rootPositionInOrder + i]);
         }
 
-        for (int i = postorder.length - 1; i >= 0 ; i--) {
-            if(leftSubtreeInOrder.contains(postorder[i])){
+        for (int i = postorder.length - 1; i >= 0; i--) {
+            if (leftSubtreeInOrder.contains(postorder[i])) {
                 currentNodeLeft = postorder[i];
                 break;
             }
         }
 
-        for (int i = postorder.length - 1; i >= 0 ; i--) {
-            if(rightSubTreeInOrder.contains(postorder[i])){
+        for (int i = postorder.length - 1; i >= 0; i--) {
+            if (rightSubTreeInOrder.contains(postorder[i])) {
                 currentNodeRight = postorder[i];
                 break;
             }
         }
 
-        for (int i : postorder){
-            if(leftSubtreeInOrder.contains(i)){
+        for (int i : postorder) {
+            if (leftSubtreeInOrder.contains(i)) {
                 leftSubtreePostOrder.add(i);
             }
 
-            if(rightSubTreeInOrder.contains(i)){
+            if (rightSubTreeInOrder.contains(i)) {
                 rightSubtreePostOrder.add(i);
             }
         }
         System.out.println("Iteration 1");
-        if(currentNodeLeft != Integer.MIN_VALUE && currentNodeRight != Integer.MIN_VALUE){
+        if (currentNodeLeft != Integer.MIN_VALUE && currentNodeRight != Integer.MIN_VALUE) {
             root.left = getNodeInt.apply(currentNodeLeft);
             root.right = getNodeInt.apply(currentNodeRight);
             treeBuilderHelperRecursive(root.left, leftSubtreeInOrder.stream().mapToInt(x -> x).toArray(),
@@ -469,9 +478,9 @@ class TraversalHelper {
 
     }
 
-   static String removeOuterParentheses(String S) {
+    static String removeOuterParentheses(String S) {
         int outerCount = S.indexOf("((");
-        if(outerCount < 0){
+        if (outerCount < 0) {
             return "";
         }
         // (()())(())
@@ -481,15 +490,15 @@ class TraversalHelper {
         outerCount = 0;
         int findFirstIndex = 0;
         for (int i = 0; i < S.length(); i++) {
-            if(sArray[i] == '('){
-                if(i <= findFirstIndex){
+            if (sArray[i] == '(') {
+                if (i <= findFirstIndex) {
                     findFirstIndex = i;
                     sArray[i] = ' ';
                 }
                 outerCount++;
             } else {
                 outerCount--;
-                if(outerCount > 0){
+                if (outerCount > 0) {
                     sArray[i + 1] = ' ';
                     i++;
                 }
@@ -497,7 +506,7 @@ class TraversalHelper {
         }
 
 
-        return new String(sArray).replace(" ","");
+        return new String(sArray).replace(" ", "");
     }
 
     static void printSubsets(char[] set) {

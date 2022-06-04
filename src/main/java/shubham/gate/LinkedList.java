@@ -3,13 +3,13 @@ package shubham.gate;
 import shubham.edu.dsalgo.leet.code.practice.ListNode;
 
 public class LinkedList {
-    static ListNode reverseListIterative(ListNode list){
+    static ListNode<Integer> reverseListIterative(ListNode<Integer> list){
         if(list == null || list.next == null){
             return list;
         } else {
-            ListNode prev = null;
+            ListNode<Integer> prev = null;
             while (list != null){
-                ListNode next = list.next;
+                ListNode<Integer> next = list.next;
                 list.next = prev;
                 prev = list;
                 list = next;
@@ -18,33 +18,33 @@ public class LinkedList {
         }
     }
 
-    static ListNode reverseListRecursive(ListNode list) {
+    static ListNode<Integer> reverseListRecursive(ListNode<Integer> list) {
         if(list == null || list.next == null){
             return list;
         } else {
-            ListNode next = list.next;
+            ListNode<Integer> next = list.next;
             list.next = null;
          return recNodeHelper(list, next);
         }
     }
 
-    static ListNode recNodeHelper(ListNode reversed, ListNode next) {
+    static ListNode<Integer> recNodeHelper(ListNode<Integer> reversed, ListNode<Integer> next) {
         if (next == null) {
             return reversed;
         } else {
-            ListNode t = next.next;
+            ListNode<Integer> t = next.next;
             next.next = reversed;
             return recNodeHelper(next, t);
         }
     }
 
     public static void main(String[] args) {
-        ListNode list = ListNode.buildRandomList(10);
+        ListNode<Integer> list = ListNode.buildRandomList(10);
         System.out.println(list);
-        ListNode res = reverseListIterative(list);
+        ListNode<Integer> res = reverseListIterative(list);
         System.out.println(res);
         System.out.println(reverseListRecursive(res));
-        ListNode t = ListNode.buildRandomList(10);
+        ListNode<Integer> t = ListNode.buildRandomList(10);
         System.out.println(t);
     }
 }

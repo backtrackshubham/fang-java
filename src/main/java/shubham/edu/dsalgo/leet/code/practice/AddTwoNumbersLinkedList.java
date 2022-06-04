@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 public class AddTwoNumbersLinkedList {
     public static void main(String[] args) {
         int[] arr = {2, 4, 3, 5, 6, 4};
-        List<ListNode> collect = Arrays.stream(arr).mapToObj((value) -> SolutionAddList.getNode.apply(value)).collect(Collectors.toList());
-        ListNode l1 = collect.get(0);
-        ListNode l2 = collect.get(1);
-        ListNode l3 = collect.get(2);
-        ListNode l4 = collect.get(3);
-        ListNode l5 = collect.get(4);
-        ListNode l6 = collect.get(5);
+        List<ListNode<Integer>> collect = Arrays.stream(arr).mapToObj((value) -> SolutionAddList.getNode.apply(value)).collect(Collectors.toList());
+        ListNode<Integer> l1 = collect.get(0);
+        ListNode<Integer> l2 = collect.get(1);
+        ListNode<Integer> l3 = collect.get(2);
+        ListNode<Integer> l4 = collect.get(3);
+        ListNode<Integer> l5 = collect.get(4);
+        ListNode<Integer> l6 = collect.get(5);
         l1.next = l2;
         l2.next = l3;
 
@@ -28,10 +28,10 @@ public class AddTwoNumbersLinkedList {
 }
 
 class SolutionAddList {
-    static Function<Integer, ListNode> getNode = ListNode::new;
+    static Function<Integer, ListNode<Integer>> getNode = ListNode::new;
 
-    static Double getResult(ListNode ln) {
-        ListNode itr;
+    static Double getResult(ListNode<Integer> ln) {
+        ListNode<Integer> itr;
         Double res = 0.0;
         Integer elem = 0;
         System.out.println(ln);
@@ -44,13 +44,13 @@ class SolutionAddList {
         return res;
     }
 
-    static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    static ListNode<Integer> addTwoNumbers(ListNode<Integer> l1, ListNode<Integer> l2) {
         Double res = getResult(l1) + getResult(l2);
         return fromInt(res);
     }
 
-    static ListNode fromInt(Double res) {
-        ListNode ln = null;
+    static ListNode<Integer> fromInt(Double res) {
+        ListNode<Integer> ln = null;
         Integer digits = Integer.parseInt(new StringBuffer(Double.toString(res).replace(".0", "")).toString());
         int digitsCount = Integer.toString(digits).length();
         Integer toInt;
@@ -62,7 +62,7 @@ class SolutionAddList {
             } else if (ln.next == null) {
                 ln.next = getNode.apply(toInt);
             } else {
-                ListNode itr = ln;
+                ListNode<Integer> itr = ln;
                 while (itr.next != null) {
                     itr = itr.next;
                 }
