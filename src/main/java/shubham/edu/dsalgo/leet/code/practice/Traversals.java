@@ -7,43 +7,63 @@ public class  Traversals {
     public static void main(String[] args) {
         TreeViews treeViews = new TreeViews<Integer>();
 
-        TreeNode<Integer> t = TraversalHelper.parseAndBuildNode("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
-////        System.out.println("Preorder " + TraversalHelper.preorderTraversalIterative(t));
-//        System.out.println("Preorder " + TraversalHelper.preorderTraversalRecursive(t, new ArrayList<>()));
-//        System.out.println("Inorder " + TraversalHelper.inorderTraversalIterative(t));
+        TreeNode<Integer> t = TraversalHelper.parseAndBuildNodeBetter("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
+        TreeNode<Integer> t2 = TraversalHelper.parseAndBuildNodeBetter("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
+        TreeNode<Integer> t3 = TraversalHelper.parseAndBuildNodeBetter("3,5,7,4,null,null,9");
+        t.printTree();
+        t2.printTree();
+        t3.printTree();
+//        System.out.println("Preorder  " + TraversalHelper.preorderTraversalIterative(t));
+//        System.out.println("Preorder  " + TraversalHelper.preorderTraversalRecursive(t, new ArrayList<>()));
+//        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(t));
 //        System.out.println("Inorder " + TraversalHelper.inorderTraversalRecursive(t, new ArrayList<>()));
 //        System.out.println("Postorder " + TraversalHelper.postorderTraversal(t));
 //        int[] inorder = {9,3,15,20,7};
 //        int[] postOrder = {9,15,7,20,3};
 //
 //        TraversalHelper.buildTree(inorder, postOrder);
-
-        TreeNode test = TreeNode.buildTree(31);
+//
+//        TreeNode test = TreeNode.buildTree(16);
 //        System.out.println(test);
 //        System.out.println("---------------------------");
 //        System.out.println(t);
 //        System.out.println("Preorder  " + TraversalHelper.preorderTraversalRecursive(test, new ArrayList<>()));;
 //        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(test));
 //        System.out.println("Postorder " + TraversalHelper.postorderTraversal(test));
-
+//
 //        System.out.println("---------------------------");
 //        System.out.println(t);
 //        System.out.println("Preorder  " + TraversalHelper.preorderTraversalRecursive(t, new ArrayList<>()));;
 //        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(t));
 //        System.out.println("Postorder " + TraversalHelper.postorderTraversal(t));
-
-        System.out.println("Tree left view "+treeViews.printView(t, true));
-        System.out.println("Tree right view "+treeViews.printView(t, false));
-
+//
+//        System.out.println("Tree left view "+treeViews.printView(t, true));
+//        System.out.println("Tree right view "+treeViews.printView(t, false));
+//
 //        System.out.println("Tree left view "+treeViews.printView(test, true));
 //        System.out.println("Tree right view "+treeViews.printView(test, false));
-
-
-        System.out.println("Tree height view "+ t.getHeight());
-        System.out.println("Tree height view "+t.getHeight());
-        t.printTree(t);
-//        t.printTree(test);
-
+//
+//
+//        System.out.println("Tree height view "+ t.getHeight());
+//        System.out.println("Tree height view "+t.getHeight());
+//        t.printTree();
+////        t.printTree(test);
+//        System.out.println("==================================================");
+//        test.printTree();
+//        TreeNode<Integer> integerTreeNode = TraversalHelper.buildSkewed(2, true);
+//        TreeNode<Integer> integerTreeNode1 = TraversalHelper.buildSkewed(3, false);
+//        integerTreeNode.printTree();
+//        integerTreeNode.printTree();
+//        System.out.println(integerTreeNode.getHeight());
+//        System.out.println(integerTreeNode1.getHeight());
+//
+//
+//        System.out.println("Preorder   " + TraversalHelper.preorderTraversalIterative(integerTreeNode1));
+//        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(integerTreeNode1));
+//        System.out.println("Postorder " + TraversalHelper.postorderTraversal(integerTreeNode1));
+//
+//
+//
 //        System.out.println("Tree height view "+ test.getHeight());
 //        System.out.println("Tree height view "+test.getHeight());
     }
@@ -57,7 +77,6 @@ class TraversalHelper {
      * @return
      */
 
-
     static TreeNode<Integer> parseAndBuildNode(String inputString) {
         int length = inputString.split(",").length;
         int levels = 0;
@@ -70,6 +89,86 @@ class TraversalHelper {
         }
         if (length + 1 != Math.pow(2, levels)) throw new IllegalArgumentException("Invalid number of nodes");
         return buildNode(inputString, levels);
+    }
+
+    static TreeNode<Integer> parseAndBuildNodeBetter(String inputString) {
+        String[] split = inputString.split(",");
+        int length = split.length;
+        int i = 0;
+        if(split[i].contains( "null")) {
+            return null;
+        }
+        TreeNode<Integer>[] treeArray = new TreeNode[length];
+
+        TreeNode<Integer> toRet = new TreeNode<>(Integer.parseInt(split[i]));
+        treeArray[i] = toRet;
+        while (i < length){
+            if(!split[i].contains("null")){
+                int leftIndex = 2 * i + 1;
+                int rightIndex = 2 * i + 2;
+                if(leftIndex < length){
+                    if(!split[leftIndex].contains("null")) {
+
+                        TreeNode<Integer> integerTreeNodeLeft = new TreeNode<>(Integer.parseInt(split[leftIndex]));
+                        treeArray[i].left = integerTreeNodeLeft;
+                        treeArray[leftIndex] = integerTreeNodeLeft;
+                    } else {
+                        treeArray[leftIndex] = null;
+                    }
+                }
+                if(rightIndex < length) {
+                    if (!split[rightIndex].contains("null")) {
+                        TreeNode<Integer> integerTreeNodeRight = new TreeNode<>(Integer.parseInt(split[rightIndex]));
+                        treeArray[i].right = integerTreeNodeRight;
+                        treeArray[rightIndex] = integerTreeNodeRight;
+                    } else {
+                        treeArray[rightIndex] = null;
+                    }
+                }
+            }
+            i++;
+        }
+        System.out.println(inputString);
+        System.out.println(split.length);
+        System.out.println(treeArray.length);
+        System.out.println(Arrays.asList(treeArray));
+//
+//        while(i <= length){
+//            int leftIndex = 2 * i + 1;
+//            int rightIndex = 2 * i + 2;
+//
+//            if(leftIndex < length){
+//
+//            }
+//
+//            if(rightIndex < length){
+//
+//            }
+//        }
+//
+        return toRet;
+    }
+
+
+
+    static TreeNode<Integer> buildSkewed(int num, boolean isLeft){
+        TreeNode<Integer> tree = null;
+
+        while (num > 0){
+            if(tree == null){
+                tree = new TreeNode<>(num--);
+            } else {
+                TreeNode tmp = new TreeNode<>(num--);
+                if(isLeft){
+                    tmp.left = tree;
+                } else {
+                    tmp.right = tree;
+                }
+                tree = tmp;
+            }
+        }
+        return tree;
+
     }
 
     private static Function<Integer, TreeNode<Integer>> getNodeInt = TreeNode::new;
@@ -86,6 +185,7 @@ class TraversalHelper {
         }
         return totalNodes;
     }
+
 
     static TreeNode<Integer> buildNode(String string, int levels) {
         TreeNode<Integer> toRet = null;

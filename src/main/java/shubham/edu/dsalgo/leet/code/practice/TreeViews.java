@@ -15,11 +15,11 @@ public class TreeViews<T> {
              Iterator<TreeNode<T>> itr = tempList.iterator();
              while (itr.hasNext()){
                  TreeNode<T> t = itr.next();
-                 if(t.right != null){
-                     child.add(t.right);
-                 }
                  if (t.left != null){
                      child.add(t.left);
+                 }
+                 if(t.right != null){
+                     child.add(t.right);
                  }
              }
              tempList = child;
@@ -30,7 +30,7 @@ public class TreeViews<T> {
          return toRet;
      }
 
-     TreeNode<T> getViewElement(List<TreeNode<T>> list, Boolean isLeft){
+     private TreeNode<T> getViewElement(List<TreeNode<T>> list, Boolean isLeft){
          if(isLeft){
              return list.get(0);
          } else {

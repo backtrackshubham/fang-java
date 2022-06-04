@@ -3,12 +3,6 @@ package shubham.edu.dsalgo.leet.code.practice;
 import java.util.*;
 import java.util.stream.Collectors;
 
-class Main{
-    public static void main(String[] args) {
-
-    }
-}
-
 class TreeNode<T> {
       T val;
       TreeNode<T> left;
@@ -34,20 +28,22 @@ class TreeNode<T> {
 
     @Override
     public String toString() {
+          return  "" +this.val;
 //        System.out.println(this.val);
-        StringBuffer str = new StringBuffer();
-        if(this.left != null && this.right != null){ // 1 0 | 0 1 | 1 1
-            return str.append(" ").append(this.left).append(" ").append(this.right).toString();
-        } else if(this.left != null) {
-            return str.append(" ").append(this.left).append(" ").toString();
-        }else if(this.right != null) {
-            return str.append(" ").append(this.right).append(" ").toString();
-        } else {
-            return str.append(this.val).toString();
-        }
+//        StringBuffer str = new StringBuffer();
+//        if(this.left != null && this.right != null){ // 1 0 | 0 1 | 1 1
+//            return str.append(" ").append(this.left).append(" ").append(this.right).toString();
+//        } else if(this.left != null) {
+//            return str.append(" ").append(this.left).append(" ").toString();
+//        }else if(this.right != null) {
+//            return str.append(" ").append(this.right).append(" ").toString();
+//        } else {
+//            return str.append(this.val).toString();
+//        }
     }
 
-    public void printElementList(List<T> elements, int firstColumn, int middleColumn){
+    private void printElementList(List<T> elements, int firstColumn, int middleColumn){
+//        System.out.println("Got to print "+ elements);
           StringBuffer sb = new StringBuffer("");
           while (firstColumn > 0){
               sb.append("\t");
@@ -60,7 +56,7 @@ class TreeNode<T> {
           }
           elements.forEach(el -> {
               if(el == null){
-                  sb.append(" \t");
+                  sb.append(" "+mid);
               } else {
                   sb.append(el+""+mid);
               }
@@ -69,22 +65,31 @@ class TreeNode<T> {
         System.out.println(sb);
     }
 
-    public void printTree(TreeNode<T> tree){
-          int height = tree.getHeight();
+
+    public void printTree(){
+          int height = this.getHeight();
           List<TreeNode<T>> li = new ArrayList<>();
-          li.add(tree);
-          while(height > 0){
-              printElementList(li.stream().map(x -> x.val).collect(Collectors.toList()), (int)Math.pow(2, height) - 1, (int)Math.pow(2, height + 1));
+          li.add(this);
+          while(height >= 0){
+              printElementList(li.stream().map(x -> {
+                  if(x != null){
+                      return x.val;
+                  } else {
+                      return null;
+                  }
+              }).collect(Collectors.toList()), (int)Math.pow(2, height) - 1, (int)Math.pow(2, height + 1));
               List<TreeNode<T>> temp = new ArrayList<>();
               Iterator<TreeNode<T>> it = li.listIterator();
               while (it.hasNext()){
                   TreeNode<T> next = it.next();
-                  if(next.left == null || next.right == null){
-                      System.out.println("Adding a null element");
-                      System.out.println(next.val);
+                  if(next != null){
+                      if(next.left == null || next.right == null){
+//                          System.out.println("Adding a null element");
+//                          System.out.println(next.val);
+                      }
+                      temp.add(next.left);
+                      temp.add(next.right);
                   }
-                  temp.add(next.left);
-                  temp.add(next.right);
               }
               height--;
               li = temp;
@@ -99,7 +104,7 @@ class TreeNode<T> {
      * @param elements
      * @return
      */
-    public static TreeNode buildTree(int elements){
+    public static TreeNode<Integer> buildTree(int elements){
         int validElements = getValidNumberOfElements(elements);
         int levels = (validElements == 1) ?
                         0 : (validElements == 3 ?
@@ -110,12 +115,12 @@ class TreeNode<T> {
                         5 : 6))));
         System.out.println(levels);
         System.out.println(validElements);
-        return buildPerfectTree(new TreeNode(r.nextInt(200)), levels);
+        return buildPerfectTree(new TreeNode<Integer>(r.nextInt(200)), levels);
     }
-    public static TreeNode buildPerfectTree(TreeNode tree, int levels){
+    public static TreeNode<Integer> buildPerfectTree(TreeNode<Integer> tree, int levels){
         if (levels != 0) {
-            tree.left = buildPerfectTree(new TreeNode(r.nextInt(200)), levels - 1);
-            tree.right = buildPerfectTree(new TreeNode(r.nextInt(200)), levels - 1);
+            tree.left = buildPerfectTree(new TreeNode<Integer>(r.nextInt(200)), levels - 1);
+            tree.right = buildPerfectTree(new TreeNode<Integer>(r.nextInt(200)), levels - 1);
         }
         return tree;
     }
@@ -142,13 +147,13 @@ class TreeNode<T> {
 
 
 class Solution2 {
-    public final TreeNode getTargetCopy(final TreeNode original, final TreeNode cloned, final TreeNode target) {
-        ArrayList<TreeNode> allNodesOriginal1 =  new ArrayList<TreeNode>();
+    public final TreeNode<Integer> getTargetCopy(final TreeNode<Integer> original, final TreeNode<Integer> cloned, final TreeNode<Integer> target) {
+        ArrayList<TreeNode<Integer>> allNodesOriginal1 =  new ArrayList<TreeNode<Integer>>();
         allNodesOriginal1.add(original);
-        ArrayList<TreeNode> allNodesCloned1 =  new ArrayList<TreeNode>();
+        ArrayList<TreeNode<Integer>> allNodesCloned1 =  new ArrayList<TreeNode<Integer>>();
         allNodesCloned1.add(cloned);
-        ArrayList<TreeNode> allNodesOriginal =  resolveNodes(allNodesOriginal1, new ArrayList<TreeNode>());
-        ArrayList<TreeNode> allNodesCloned =  resolveNodes(allNodesCloned1, new ArrayList<TreeNode>());
+        ArrayList<TreeNode<Integer>> allNodesOriginal =  resolveNodes(allNodesOriginal1, new ArrayList<TreeNode<Integer>>());
+        ArrayList<TreeNode<Integer>> allNodesCloned =  resolveNodes(allNodesCloned1, new ArrayList<TreeNode<Integer>>());
         ListIterator itr = allNodesOriginal.listIterator();
         int index = 0 ;
         while (itr.hasNext()){
@@ -161,13 +166,13 @@ class Solution2 {
         return allNodesCloned.get(index);
     }
 
-    private ArrayList<TreeNode> resolveNodes(ArrayList<TreeNode> toProcess, ArrayList<TreeNode> processed){
+    private ArrayList<TreeNode<Integer>> resolveNodes(ArrayList<TreeNode<Integer>> toProcess, ArrayList<TreeNode<Integer>> processed){
         boolean hasAllNull = true;
-        ArrayList<TreeNode> toProcessNext = new ArrayList<>();
-        ListIterator<TreeNode> iteratorPN = toProcess.listIterator();
+        ArrayList<TreeNode<Integer>> toProcessNext = new ArrayList<>();
+        ListIterator<TreeNode<Integer>> iteratorPN = toProcess.listIterator();
 
         while (iteratorPN.hasNext()){
-            TreeNode tn = iteratorPN.next();
+            TreeNode<Integer> tn = iteratorPN.next();
             processed.add(tn);
             if(tn == null){
                 toProcessNext.add(null);
