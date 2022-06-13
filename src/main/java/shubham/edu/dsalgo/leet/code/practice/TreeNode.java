@@ -99,6 +99,17 @@ class TreeNode<T> {
         checkHeap(this, cp, false);
     }
 
+    public TreeNode<T> findCommonAncestor(TreeNode<T> tree, Comparator<T> cp, T a, T b){
+        if(tree == null){
+            return null;
+        }
+
+        if(tree.left != null && cp.compare(tree.left.val, a) == 0){
+            return tree;
+        }
+        return tree;
+    }
+
     private boolean checkHeap(TreeNode<T> tree, Comparator<T> cp, boolean recheckHeap) {
         if (tree == null) {
             return false;
@@ -119,6 +130,13 @@ class TreeNode<T> {
                 if (cp.compare(tree.right.val, tree.val) > 0) {
                     T tmp = tree.right.val;
                     tree.right.val = tree.val;
+                    tree.val = tmp;
+                    recheckHeap = true;
+                }
+            } else {
+                if (cp.compare(tree.left.val, tree.val) > 0) {
+                    T tmp = tree.left.val;
+                    tree.left.val = tree.val;
                     tree.val = tmp;
                     recheckHeap = true;
                 }
@@ -145,16 +163,20 @@ class TreeNode<T> {
             }
         }
 
-        boolean b = checkHeap(tree.left, cp, recheckHeap);
-        if(b){
-            return checkHeap(tree, cp, recheckHeap);
+        while(recheckHeap){
+            recheckHeap = checkHeap(tree.left, cp, recheckHeap);
         }
-        boolean b1 = checkHeap(tree.right, cp, recheckHeap);
-        if(b1){
-            return checkHeap(tree, cp, recheckHeap);
+
+        while(recheckHeap){
+            recheckHeap = checkHeap(tree.right, cp, recheckHeap);
         }
+
 //        checkHeap(tree, cp);
-        return false;
+        if(recheckHeap) {
+            return checkHeap(tree, cp, recheckHeap);
+        } else {
+            return false;
+        }
 
     }
 
@@ -259,6 +281,7 @@ class Solution2 {
                 hasAllNull = false;
             }
         }
+
         if (hasAllNull) {
             return processed;
         }

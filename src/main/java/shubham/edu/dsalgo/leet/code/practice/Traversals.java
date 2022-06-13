@@ -2,15 +2,16 @@ package shubham.edu.dsalgo.leet.code.practice;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Traversals {
     public static void main(String[] args) {
         TreeViews treeViews = new TreeViews<Integer>();
 
         TreeNode<Integer> t = TraversalHelper.parseAndBuildNodeBetter("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
-        TreeNode<Integer> t2 = TraversalHelper.parseAndBuildNodeBetter("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
-        TreeNode<Integer> t3 = TraversalHelper.parseAndBuildNodeBetter("3,5,7,4,null,null,9");
-        TreeNode<Integer> t4 = TraversalHelper.parseAndBuildNodeBetter("3,5,7,4");
+//        TreeNode<Integer> t2 = TraversalHelper.parseAndBuildNodeBetter("3,5,1,6,2,0,8,null,null,7,4,null,null,null,null");
+//        TreeNode<Integer> t3 = TraversalHelper.parseAndBuildNodeBetter("3,5,7,4,null,null,9");
+//        TreeNode<Integer> t4 = TraversalHelper.parseAndBuildNodeBetter("3,5,7,4");
         t.printTree();
 //        t2.printTree();
 //        t3.printTree();
@@ -26,6 +27,7 @@ public class Traversals {
             }
         });
         t.printTree();
+
 //        System.out.println("Preorder  " + TraversalHelper.preorderTraversalIterative(t));
 //        System.out.println("Preorder  " + TraversalHelper.preorderTraversalRecursive(t, new ArrayList<>()));
 //        System.out.println("Inorder   " + TraversalHelper.inorderTraversalIterative(t));

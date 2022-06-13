@@ -21,9 +21,17 @@ public class AddTwoNumbersLinkedList {
         l4.next = l5;
         l5.next = l6;
 
+        l1.addElementEnd(new ListNode<>(12));
+        l1.addElementEnd(new ListNode<>(13));
+        l1.addElementEnd(new ListNode<>(14));
+        System.out.println(l1);
+        l1.reverseListRecursive();
         System.out.println(l1);
         System.out.println(l4);
-        System.out.println(SolutionAddList.addTwoNumbers(l1, l4));
+        l4.reverseListRecursive();
+        System.out.println(l4);
+//        System.out.println(SolutionAddList.addTwoNumbers(l1, l4));
+
     }
 }
 
@@ -48,6 +56,10 @@ class SolutionAddList {
         Double res = getResult(l1) + getResult(l2);
         return fromInt(res);
     }
+
+//    static ListNode<Integer> addTwoNumbersBetter(ListNode<Integer> l1, ListNode<Integer> l2) {
+//        while ()
+//    }
 
     static ListNode<Integer> fromInt(Double res) {
         ListNode<Integer> ln = null;
